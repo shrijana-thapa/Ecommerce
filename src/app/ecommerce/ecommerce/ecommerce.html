@@ -1,1 +1,45 @@
-<p>ecommerce works!</p>
+<mat-toolbar color="primary" class="toolbar">
+  <span class="logo">🛍 E-Commerce Store</span>
+  <span class="spacer"></span>
+
+  <!-- Cart Button -->
+  <button mat-raised-button color="accent">
+    Cart ({{ (cart$ | async)?.length || 0 }})
+  </button>
+
+  <!-- Checkout Button -->
+  <button mat-raised-button color="warn">
+    Checkout
+  </button>
+</mat-toolbar>
+
+<div class="container">
+  <h2>Products</h2>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading$ | async" class="loading">
+    <mat-spinner diameter="40"></mat-spinner>
+    <span>Loading products...</span>
+  </div>
+
+  <!-- Products Grid -->
+  <mat-grid-list cols="3" gutterSize="16" rowHeight="350px" class="grid">
+    <mat-grid-tile *ngFor="let p of (products$ | async)">
+      <mat-card class="product-card">
+        <img mat-card-image [src]="p.image" alt="{{ p.title }}" />
+        <mat-card-header>
+          <mat-card-title>{{ p.title }}</mat-card-title>
+          <mat-card-subtitle>${{ p.price }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ p.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="addToCart(p)">
+            Add to Cart
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
