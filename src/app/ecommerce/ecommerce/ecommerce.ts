@@ -32,9 +32,14 @@ this.loading$ = store.select(state => state['product'].loading);
 
   addToCart(product: Product) {
     this.store.dispatch(ProductActions.addToCart({ product }));
+ 
   }
 
   removeFromCart(id: number) {
     this.store.dispatch(ProductActions.removeFromCart({ productId: id }));
+  }
+  onSearch(query:string){
+    this.store.dispatch(ProductActions.searchProducts({query}))
+
   }
 }

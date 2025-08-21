@@ -9,3 +9,7 @@ export const loadProductsFailure = createAction('[Product] Load Products Failure
 // Cart actions
 export const addToCart = createAction('[Cart] Add To Cart', props<{ product: Product }>());
 export const removeFromCart = createAction('[Cart] Remove From Cart', props<{ productId: number }>());
+
+export const showNotification=createAction('[notification] show',props<{message:string}>());
+
+export const searchProducts=createAction('')

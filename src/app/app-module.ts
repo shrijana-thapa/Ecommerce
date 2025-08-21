@@ -10,12 +10,14 @@ import { MatDividerModule } from '@angular/material/divider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { Login } from './loginComponent/components/login/login';
 
 
 
 @NgModule({
   declarations: [
-    App
+    App,
+    Login
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,31 @@
+<div style="max-width: 400px; margin: auto; padding: 2rem;">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h2 style="text-align: center;">Login</h2>
+
+    <mat-form-field appearance="fill" style="width: 100%; margin-bottom: 1rem;">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" placeholder="Enter your email" />
+      <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Invalid email</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%; margin-bottom: 1.5rem;">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" type="password" placeholder="Enter your password" />
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
+      <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+        Password must be at least 6 characters
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" style="width: 100%;">Login</button>
+  </form>
+
+  <!-- ✅ Move this OUTSIDE the form tag -->
+  <div style="text-align: center; margin-top: 1rem;">
+    <span>Don't have an account?</span>
+    <button type="button" mat-button color="primary" routerLink="/signup" style="font-weight: bold; text-transform: none; padding: 0 8px;">
+      Sign up
+    </button>
+  </div>
+</div>

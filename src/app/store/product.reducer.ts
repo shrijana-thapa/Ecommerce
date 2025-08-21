@@ -30,5 +30,6 @@ export const productReducer = createReducer(
   on(ProductActions.removeFromCart, (state, { productId }) => ({
     ...state,
     cart: state.cart.filter(p => p.id !== productId)
-  }))
+  })),
+
 );
