@@ -9,7 +9,7 @@ export const loginReducer=createReducer(initialState,on(AuthActions.login,(state
      loading:true,
      error:null
   })),
-  on(AuthActions.loginSucess,(state,{user})=>
+  on(AuthActions.loginSuccess,(state,{user})=>
     ({
       ...state,
       user,
@@ -25,10 +25,15 @@ export const loginReducer=createReducer(initialState,on(AuthActions.login,(state
           error
         })),
       on(AuthActions.logout,(state)=>
-        ({
+        {
+          localStorage.removeItem('authToken');
+          return{
           ...state,
-          user:null
-        }))
+          user:null,
+          loading:false,
+          error:null
+          }
+        })
 
     
     )
