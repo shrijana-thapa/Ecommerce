@@ -1,48 +1,36 @@
-// import { Component } from '@angular/core';
-// import { Component, OnInit } from '@angular/core';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { Router } from '@angular/router';
-// import { CommonModule } from '@angular/common';
-// import { FormService } from '../../Services/form/formService';
 
-// @Component({
-//   selector: 'app-login',
-//   standalone: false,
-//   templateUrl: './login.html',
-//   styleUrl: './login.scss'
-// })
-// export class Login implements OnInit{
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AuthState } from '../../Store/authguard.state';
+import { selectUser, selectLoading, selectError } from '../../Store/authguard.selectors';
+import { OnInit } from '@angular/core';
+import * as AuthActions from '../../Store/authguard.action'
 
-//   loginForm!: FormGroup;
 
-//   constructor(private fb: FormBuilder,private router : Router,private formService:FormService) {}
+@Component({
+  selector: 'app-login',
+  standalone: false,
+  templateUrl: './login.html',
+  styleUrl: './login.scss'
+})
+export class Login {
 
-//   ngOnInit(): void {
-//     this.loginForm = this.fb.group({
-//       email: ['', [Validators.required, Validators.email]],
-//       password: ['', [Validators.required, Validators.minLength(6)]],
-//     });
-//   }
+    email = '';
+  password = '';
+    user$: Observable<any>;
+  loading$: Observable<boolean>;
+  error$: Observable<string | null>;
 
-//   onSubmit(): void {
-  
-//    const loginValue=this.loginForm.value;
-//     const signupValue=this.formService.getUserData();
-//    if(!signupValue){
-//     alert("No account found.Please signup first");
-//     this.router.navigate(['/signup']);
-//     return;
-//    }
+    constructor(private store: Store<{ auth: AuthState }>) {
+    this.user$ = this.store.select(selectUser);
+    this.loading$ = this.store.select(selectLoading);
+    this.error$ = this.store.select(selectError);
+  }
 
-  
-//    if(signupValue.email === loginValue.email && signupValue.password===loginValue.password){
-//     this.router.navigate(['/dashboard']);
-//     return;
-//    }
-//    else{
-//     alert('Invalid credentials');
-//    }
-//   }
+   onLogin(event:Event){
+    event.preventDefault();
+    this.store.dispatch(AuthActions.login({email:this.email,password:this.password}));
 
-// }
-
+   }
+}

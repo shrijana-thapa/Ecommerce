@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { Login } from './loginComponent/components/login/login';
+import { LoginModule } from './loginComponent/components/login/login-module';
 
 
 
@@ -25,7 +26,7 @@ import { Login } from './loginComponent/components/login/login';
  ,EcommerceModule,
        BrowserAnimationsModule,
          StoreModule.forRoot({}),
-    EffectsModule.forRoot([]), 
+    EffectsModule.forRoot([]), LoginModule
   ],
   providers: [
     
