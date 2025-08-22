@@ -8,6 +8,9 @@ import { loginReducer } from '../../Store/authguard.reducers';
 import { FormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from '../../Store/authguard.effects';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import { AuthEffects } from '../../Store/authguard.effects';
     LoginRoutingModule,
         FormsModule,
         StoreModule.forFeature('auth',loginReducer),
-        EffectsModule.forFeature([AuthEffects])
+        EffectsModule.forFeature([AuthEffects]),
+         MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   exports:[Login]
 })

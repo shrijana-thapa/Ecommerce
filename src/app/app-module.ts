@@ -17,8 +17,7 @@ import { LoginModule } from './loginComponent/components/login/login-module';
 
 @NgModule({
   declarations: [
-    App,
-    Login
+    App
   ],
   imports: [
     BrowserModule,
@@ -26,7 +25,7 @@ import { LoginModule } from './loginComponent/components/login/login-module';
  ,EcommerceModule,
        BrowserAnimationsModule,
          StoreModule.forRoot({}),
-    EffectsModule.forRoot([]), LoginModule
+    EffectsModule.forRoot([])
   ],
   providers: [
     

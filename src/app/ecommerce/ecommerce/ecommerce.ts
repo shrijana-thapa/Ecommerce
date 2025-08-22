@@ -38,8 +38,8 @@ this.loading$ = store.select(state => state['product'].loading);
   removeFromCart(id: number) {
     this.store.dispatch(ProductActions.removeFromCart({ productId: id }));
   }
-  onSearch(query:string){
-    this.store.dispatch(ProductActions.searchProducts({query}))
+  // onSearch(query:string){
+  //   this.store.dispatch(ProductActions.searchProducts({query}))
 
-  }
+  
 }

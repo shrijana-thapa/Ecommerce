@@ -9,6 +9,9 @@ import { productReducer } from '../../store/product.reducer';
 import { ProductEffects } from '../../store/product.effects';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { LoginModule } from '../../loginComponent/components/login/login-module';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -16,9 +19,9 @@ import { EffectsModule } from '@ngrx/effects';
   imports: [
     CommonModule,
     EcommerceRoutingModule,
-    CommonModule, EcommerceRoutingModule, HttpClientModule, MatToolbarModule, MatButtonModule, MatCardModule, MatGridListModule, MatListModule, MatDividerModule, MatIconModule, MatProgressSpinnerModule,  
+    CommonModule, EcommerceRoutingModule, HttpClientModule, MatToolbarModule, MatButtonModule, MatCardModule, MatGridListModule, MatListModule, MatDividerModule, MatIconModule, MatProgressSpinnerModule, MatFormFieldModule ,MatInputModule, 
      StoreModule.forFeature('product', productReducer),
-EffectsModule.forFeature([ProductEffects])
+EffectsModule.forFeature([ProductEffects]),LoginModule
 
   ],
   exports:[EcommerceComponent]

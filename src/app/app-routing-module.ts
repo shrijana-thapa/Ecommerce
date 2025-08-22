@@ -6,7 +6,10 @@ const routes: Routes = [
   {
     path:'ecommerce',loadChildren:()=> import('./ecommerce/ecommerce/ecommerce-module').then(m => m.EcommerceModule)
   },
-    { path: '', redirectTo: 'ecommerce', pathMatch: 'full' }
+    { path: '', redirectTo: 'ecommerce', pathMatch: 'full' },
+    {
+      path:'login',loadChildren:()=>import('./loginComponent/components/login/login-module').then(m=>m.LoginModule)
+    }
 ];
 
 @NgModule({
