@@ -12,6 +12,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { Login } from './loginComponent/components/login/login';
 import { LoginModule } from './loginComponent/components/login/login-module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { authInterceptor } from './loginComponent/interceptors/auth-interceptor';
 
 
 
@@ -27,7 +29,7 @@ import { LoginModule } from './loginComponent/components/login/login-module';
          StoreModule.forRoot({}),
     EffectsModule.forRoot([])
   ],
-  providers: [
+  providers: [ {provide:HTTP_INTERCEPTORS,useClass: authInterceptor,multi:true}
     
   ],
   bootstrap: [App]
