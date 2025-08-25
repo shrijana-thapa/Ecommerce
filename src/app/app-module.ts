@@ -14,6 +14,7 @@ import { Login } from './loginComponent/components/login/login';
 import { LoginModule } from './loginComponent/components/login/login-module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { authInterceptor } from './loginComponent/interceptors/auth-interceptor';
+import { Admin } from './admin component/admin/admin';
 
 
 

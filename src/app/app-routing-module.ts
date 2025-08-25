@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EcommerceComponent } from './ecommerce/ecommerce/ecommerce';
+import { AuthGuard } from './loginComponent/authguard/auth-guard';
 
 const routes: Routes = [
   {
@@ -9,6 +10,9 @@ const routes: Routes = [
     { path: '', redirectTo: 'ecommerce', pathMatch: 'full' },
     {
       path:'login',loadChildren:()=>import('./loginComponent/components/login/login-module').then(m=>m.LoginModule)
+    },
+    {
+      path:'admin',loadChildren:()=>import('./admin component/admin/admin-module').then(m=>m.AdminModule) ,canActivate: [AuthGuard]
     }
 ];
 

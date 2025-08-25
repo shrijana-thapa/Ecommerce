@@ -6,6 +6,7 @@ import { AuthService } from "../services/auth";
 import { of,map } from "rxjs";
 import { ofType } from "@ngrx/effects";
 import { tap } from "rxjs";
+import { Router } from "@angular/router";
 
 @Injectable({
 providedIn:'root',
@@ -15,7 +16,7 @@ export class AuthEffects{
 
    action$=inject(Actions);
 
-  constructor( private service:AuthService){}
+  constructor( private service:AuthService,private router:Router){}
 
   login$=createEffect( ()=> this.action$.pipe(
     ofType(AuthActions.login), switchMap( action => this.service.login(action.email,action.password).pipe(
@@ -32,7 +33,7 @@ export class AuthEffects{
   tap(action=>{
     localStorage.setItem('authToken',action.user.token);
 
-  //redirect to admin pannel this.router.navigate(['/admin']);
+   this.router.navigate(['/admin']);
   }
 )), {dispatch:false}
   );
