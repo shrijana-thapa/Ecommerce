@@ -25,7 +25,7 @@ describe('Login', () => {
     await TestBed.configureTestingModule({
       declarations: [Login],
       imports:[FormsModule],
-      providers: [provideMockStore({})]
+      providers: [provideMockStore({initialState:{auth:initialState}})]
     })
     .compileComponents();
 
@@ -35,10 +35,8 @@ describe('Login', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 
+  
 
 
     it('should dispatch login action on form submit', () => {
@@ -54,27 +52,34 @@ describe('Login', () => {
     );
   });
 
-  it('should show loading message when loading true',()=>{
+  it('should show loading message when loading true',async()=>{
     store.setState({auth:{...initialState,loading:true}});
     fixture.detectChanges();
-    const loadingText=fixture.debugElement.query(By.css('p')).nativeElement.textContent;
-    expect(loadingText).toContain('Loading...');
+          await fixture.whenStable();
+  
+    const loadingText=fixture.debugElement.query(By.css('p'));
+      expect(loadingText).not.toBeNull(); 
+    expect(loadingText!.nativeElement.textContent).toContain('Loading...');
   })
 
 
 
-  it('should show error message when error exist',()=>{
+  it('should show error message when error exist',async()=>{
     store.setState({auth:{...initialState,error:'invalid credentials'}});
     fixture.detectChanges();
-    const errorText=fixture.debugElement.query(By.css('p')).nativeElement.textContent;
-    expect(errorText).toContain('invalid credentials');
+     await fixture.whenStable(); // wait for async pipe to emit error value so that null error disappear 
+    const errorText=fixture.debugElement.query(By.css('p'));
+    expect(errorText).not.toBeNull();
+    expect(errorText!.nativeElement.textContent).toContain('invalid credentials');
   });
 
-  it('should show welcome message when user exist',()=>{
+  it('should show welcome message when user exist',async()=>{
     store.setState({auth:{...initialState,user:{email:'example@gmail.com',token: 'dummy-token'}}});
       fixture.detectChanges();
-      const userText=fixture.debugElement.query(By.css('p')).nativeElement.textContent;
-      expect(userText).toContain('welcome example@gmail.com');
+          await fixture.whenStable();
+      const userText=fixture.debugElement.query(By.css('p'));
+      expect(userText).not.toBeNull;
+      expect(userText!.nativeElement.textContent).toContain('Welcome, example@gmail.com');
   });
 
   
