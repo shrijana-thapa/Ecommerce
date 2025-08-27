@@ -8,10 +8,16 @@ describe('AuthGuard', () => {
       TestBed.runInInjectionContext(() => new AuthGuard(TestBed.inject(Router)).canActivate());
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers:[AuthGuard]
+    });
   });
 
   it('should be created', () => {
     expect(executeGuard).toBeTruthy();
   });
+   
+  
+
+
 });
