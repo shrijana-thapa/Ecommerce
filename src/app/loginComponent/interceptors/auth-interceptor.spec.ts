@@ -3,6 +3,8 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { HttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { authInterceptor } from './auth-interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AuthInterceptor (class)', () => {
   let http: HttpClient;
@@ -10,10 +12,13 @@ describe('AuthInterceptor (class)', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        authInterceptor,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        imports: [HttpClientTestingModule], 
+        providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: authInterceptor,
+      multi: true, // ✅ important! allows multiple interceptors
+    }
       ]
     });
 
