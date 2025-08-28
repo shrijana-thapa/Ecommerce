@@ -38,4 +38,25 @@ describe('AuthInterceptor (class)', () => {
     const req = httpMock.expectOne('/test');
     expect(req.request.headers.get('Authorization')).toBe('Bearer 123');
   });
+
+  it('should not add Authorization header when token does not exist', () => {
+  localStorage.removeItem('authToken');
+
+  http.get('/test').subscribe();
+
+  const req = httpMock.expectOne('/test');
+  expect(req.request.headers.has('Authorization')).toBeFalse();
+});
+
+  it('should not add Authorization header when token is empty string', () => {
+    localStorage.setItem('authToken', '');  // simulate empty token
+
+    http.get('/test').subscribe();
+
+    const req = httpMock.expectOne('/test');
+    expect(req.request.headers.has('Authorization')).toBeFalse();
+
+    req.flush({});
+  });
+
 });

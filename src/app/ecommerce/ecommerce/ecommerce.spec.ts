@@ -42,6 +42,7 @@ describe('Ecommerce', () => {
   it('should dispatch productload action when on init ',()=>{
 
    const dispatchSpy=spyOn(store,'dispatch');
+     component.ngOnInit();
    expect(dispatchSpy).toHaveBeenCalledWith(ProductActions.loadProducts());
   });
 
