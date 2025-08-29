@@ -3,10 +3,12 @@
   <span class="spacer"></span>
 
   <!-- Cart Button -->
-  <button mat-raised-button color="accent">
-    Cart ({{ (cart$ | async)?.length || 0 }})
-  </button>
-<!-- 
+  <ng-container *ngIf="cartItems$ | async as cartItems">
+    <button mat-raised-button color="accent" routerLink="/cart">
+      Cart ({{ cartCount$ | async }})
+    </button>
+  </ng-container>
+  <!-- 
   <div class="container">
         <mat-form-field appearance="outline">
            <mat-label>Search Products</mat-label>
@@ -17,15 +19,10 @@
 
   </div> -->
 
-
   <!-- Checkout Button -->
-  <button mat-raised-button color="warn"  routerLink="/login">
-    login
-  </button>
+  <button mat-raised-button color="warn" routerLink="/login">login</button>
 
-    <button mat-raised-button color="warn"  routerLink="/admin">
-    Admin
-  </button>
+  <button mat-raised-button color="warn" routerLink="/admin">Admin</button>
 </mat-toolbar>
 
 <div class="container">
@@ -39,7 +36,7 @@
 
   <!-- Products Grid -->
   <mat-grid-list cols="3" gutterSize="16" rowHeight="350px" class="grid">
-    <mat-grid-tile *ngFor="let p of (products$ | async)">
+    <mat-grid-tile *ngFor="let p of products$ | async">
       <mat-card class="product-card">
         <img mat-card-image [src]="p.image" alt="{{ p.title }}" />
         <mat-card-header>
@@ -47,7 +44,7 @@
           <mat-card-subtitle>${{ p.price }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <p>{{ p.description }}</p>
+          <p>{{ p.description | slice : 0 : 25 }}</p>
         </mat-card-content>
         <mat-card-actions>
           <button mat-raised-button color="primary" (click)="addToCart(p)">

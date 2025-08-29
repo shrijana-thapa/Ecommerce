@@ -13,6 +13,9 @@ const routes: Routes = [
     },
     {
       path:'admin',loadChildren:()=>import('./admin component/admin/admin-module').then(m=>m.AdminModule) ,canActivate: [AuthGuard]
+    },
+    {
+      path:'cart',loadChildren:()=>import('./cartComponent/cart/cart-module').then(m =>m.CartModule)
     }
 ];
 
